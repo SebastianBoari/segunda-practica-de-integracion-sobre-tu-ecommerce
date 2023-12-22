@@ -1,0 +1,38 @@
+[
+	{
+		"id": 1,
+		"title": "Vino mendocino",
+		"description": "Un vino mendocino",
+		"price": 37,
+		"thumbnails": [
+			"https://www.solyvinomendoza.com/13871-large_default/vino-malbec-falasco-fausto-750-ml.jpg",
+			"www.imgur.com/imagen-del-vino-mendocino"
+		],
+		"code": "123ABC123",
+		"stock": 999
+	},
+	{
+		"id": 2,
+		"title": "Cerveza",
+		"description": "Una cerveza Belga",
+		"price": 4,
+		"thumbnails": [
+			"www.imgur.com/imagen-de-la-cerveza-belga",
+			"www.imgur.com/imagen-de-la-cerveza-belga",
+			"www.imgur.com/imagen-de-la-cerveza-belga"
+		],
+		"code": "123EFG123",
+		"stock": 399
+	},
+	{
+		"id": 3,
+		"title": "Arroz",
+		"description": "Arroz blanco, no se pasa ni se pega",
+		"code": "ABC123ASDASD98",
+		"price": 29,
+		"status": true,
+		"stock": 200,
+		"category": "alimentos",
+		"thumbnails": "www.imgur.com/arroz"
+	}
+]

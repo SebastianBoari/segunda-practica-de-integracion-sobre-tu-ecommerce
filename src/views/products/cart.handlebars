@@ -1,0 +1,52 @@
+<div class="container my-3" id="cart-container">
+    {{#each data.products}}
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{this.product.thumbnails.[0]}}" alt="Imagen del producto seleccionado en el carrito"
+                    class="img-fluid rounded-start" style="width: 100%; height: 100%; object-fit: cover;" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.product.title}}</h5>
+
+                    {{#if this.product.shortDescription}}
+                    <p class="card-text">{{this.product.shortDescription}}...</p>
+                    {{else}}
+                    <p class="card-text">{{this.product.description}}</p>
+                    {{/if}}
+
+                    <div class="d-flex align-items-end">
+                        <div>
+                            {{#if this.isMoreThanOne}}
+                            <p class="card-text">Cantidad seleccionada: {{this.quantity}} unidades</p>
+                            <p class="card-text">Precio unitario: ${{this.product.price}}</p>
+                            <p class="card-title">Sub-total: ${{this.subTotal}}</p>
+                            {{else}}
+                            <p class="card-text">Cantidad seleccionada: {{this.quantity}} unidad</p>
+                            <p class="card-title">Precio unitario: ${{this.product.price}}</p>
+                            {{/if}}
+                        </div>
+
+                        <div class="d-flex flex-column" style="gap: 1rem">
+                            <a href="/product/{{this.product._id}}" class="btn btn-primary view-details"
+                                style="height: fit-content;">
+                                Ver
+                                más
+                            </a>
+                            <button type="button" class="btn btn-danger deleteOfCart"
+                                data-product-id="{{this.product._id}}" style="height: fit-content;">Eliminar</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+    <h3 class="card-title text-light">TOTAL: ${{data.totalPrice}}</h3>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../js/cart.js"></script>

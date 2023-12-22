@@ -1,0 +1,8 @@
+.card-body {
+    flex-flow: column;
+}
+
+.view-details {
+    align-self: flex-end;
+    max-width: fit-content;
+}

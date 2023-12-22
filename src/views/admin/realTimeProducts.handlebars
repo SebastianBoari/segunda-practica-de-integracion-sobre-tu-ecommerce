@@ -1,0 +1,47 @@
+<h1 class="text-light text-center">Panel de administracion</h1>
+<section class="container">
+    <div class="container">
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseForm"
+            aria-expanded="false" aria-controls="collapseForm" id="createBtn">
+            Crear un producto
+        </button>
+    </div>
+
+    <div class="collapse" id="collapseForm">
+        <form id="form" class="container">
+            <div class="mb-3">
+                <input type="text" class="form-control" id="title" placeholder="Titulo">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="description" placeholder="Descripcion">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="code" placeholder="Codigo">
+            </div>
+            <div class="mb-3">
+                <input type="number" class="form-control" id="price" placeholder="Precio">
+            </div>
+            <div class="mb-3">
+                <input type="number" class="form-control" id="stock" placeholder="Stock">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="category" placeholder="Categoria">
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" id="thumbnails"
+                    placeholder="Imagenes (Separar por punto y coma)"></textarea>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="status">
+                <label class="form-check-label" for="status">Crear y publicar</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </form>
+    </div>
+</section>
+
+<section id="products-container">
+
+</section>
+<script src="/socket.io/socket.io.js"></script>
+<script src="../js/realTimeProducts.js"></script>

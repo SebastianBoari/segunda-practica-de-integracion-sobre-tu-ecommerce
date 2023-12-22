@@ -1,0 +1,91 @@
+<div class="container" id="products-container">
+
+    <div class="container bg-light rounded my-5 p-3 d-flex justify-content-center flex-wrap"
+        style="max-width: fit-content; gap: 2rem;">
+
+        <div class="product-images" style="max-width: 480px;">
+            <img src="{{product.thumbnails.[0]}}" alt="" class="img-fluid rounded">
+        </div>
+
+        <div class="product-info d-flex flex-column justify-content-between" style="max-width: 480px;">
+            <h3 class="card-title">{{product.title}}</h3>
+            <p class="card-text">Categoria: {{product.category}}</p>
+            <p class="card-text">{{product.description}}</p>
+
+            <div class="d-flex justify-content-between align-items-center m-0 flex-wrap my-2">
+                {{#if product.status}}
+                <h6 class="card-title my-3">Stock: <span class="stock"
+                        data-product-id="{{product._id}}">{{product.stock}}</span> unidades
+                </h6>
+                {{else}}
+                <h6 class="card-title my-3">Stock: <span class="stock" data-product-id="{{product._id}}">0</span>
+                    unidades
+                </h6>
+                {{/if}}
+
+                <h5 class="card-title product-price m-0">${{product.price}}</h5>
+            </div>
+
+            {{!-- Contador y Agregar al carrito --}}
+            <div class="d-flex justify-content-between">
+                {{#if product.status}}
+                {{!-- Contador --}}
+                <div class="d-flex flex-row justify-content-between rounded counter bg-secondary mb-2">
+
+                    <button class="btn btn-secondary minus rounded-start bg-secondary text-light border-0 p-3"
+                        data-product-id="{{product._id}}" style="height: fit-content;">
+                        -
+                    </button>
+
+                    <p class="btn btn-secondary number bg-secondary text-light m-0 p-3"
+                        data-product-id="{{product._id}}" style="height: fit-content;">
+                        0
+                    </p>
+
+                    <button class="btn btn-secondary add rounded-end bg-secondary text-light border-0 p-3"
+                        data-product-id="{{product._id}}" style="height: fit-content;">
+                        +
+                    </button>
+                </div>
+
+                {{!-- Agregar al carrito --}}
+                <button class="btn btn-success addToCart p-3" data-product-id="{{product._id}}"
+                    style="height: fit-content;">
+                    Agregar al
+                    carrito
+                </button>
+                {{else}}
+                {{!-- Contador --}}
+                <div
+                    class="d-flex flex-row justify-content-between align-items-center rounded counter bg-secondary mb-2">
+
+                    <button class="btn btn-secondary minus rounded-start bg-secondary text-light border-0 p-3 disabled"
+                        data-product-id="{{product._id}}" style="height: fit-content;">
+                        -
+                    </button>
+
+                    <p class="btn btn-secondary number bg-secondary text-light m-0 p-3 disabled"
+                        data-product-id="{{product._id}}" style="height: fit-content;">
+                        0
+                    </p>
+
+                    <button class="btn btn-secondary add rounded-end bg-secondary text-light border-0 p-3 disabled"
+                        data-product-id="{{product._id}}" style="height: fit-content;">
+                        +
+                    </button>
+
+                </div>
+
+                <button class="btn btn-dark addToCart disabled p-3 bg-secondary" data-product-id="{{product._id}}"
+                    style="height: fit-content;">
+                    Agregar
+                    al
+                    carrito
+                </button>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../js/product.js"></script>
