@@ -1,12 +1,12 @@
 {
-  "name": "10-segunda-practica-de-integracion-sobre-tu-ecommerce",
+  "name": "09-refactor-a-nuestro-login",
   "version": "1.0.0",
-  "description": "Contarás con Mongo como sistema de persistencia principal. Tendrás definidos todos los endpoints para poder trabajar con productos y carritos.",
-  "main": "./src/app.js",
+  "description": "Con base en el login de nuestro entregable anterior, refactorizar para incluir los nuevos conceptos.",
+  "main": "src/app.js",
   "type": "module",
   "scripts": {
-    "start": "node . --mode production",
-    "dev": "nodemon . --mode development"
+    "start": "node .",
+    "dev": "nodemon ."
   },
   "keywords": [],
   "author": "",
@@ -17,15 +17,11 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "commander": "^11.1.0",
     "connect-mongo": "^5.1.0",
-    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
     "express-session": "^1.17.3",
-    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
     "mongoose-paginate-v2": "^1.7.4",
     "passport": "^0.7.0",

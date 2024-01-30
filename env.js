@@ -1,25 +1,8 @@
-import { Command } from 'commander'
-import dotenv from 'dotenv'
+export const uri = 'mongodb+srv://sebaboari:ValenAprobamePorfa@cluster0.bboi6si.mongodb.net/ecommerce'
+export const saltWord = 'secret'
 
-const program = new Command()
+export const clientID = 'Iv1.c6393a5a4e45f659'
+export const clientSecret = 'd6c50b23296ed4124f53136ef599d0b89fa26de2'
+export const callbackURL = 'http://localhost:8080/api/session/githubcallback'
 
-program
-	.option('--mode <mode>', 'execution mode', 'development')
-program.parse()
-
-const enviroment = program.opts().mode
-
-dotenv.config({
-	path: `./.env.${enviroment}`
-})
-
-export const port = process.env.PORT
-export const uri = process.env.MONGO_URI
-export const saltWord = process.env.SALT_WORD
-
-export const clientID = process.env.CLIENT_ID
-export const clientSecret = process.env.CLIENT_SECRET
-export const callbackURL = process.env.GITHUB_CALLBACK_URL
-
-export const jwtKey = process.env.JWT_KEY
-export const cookieName = process.env.COOKIE_NAME
+export const jwtKey = 'c0d3r'

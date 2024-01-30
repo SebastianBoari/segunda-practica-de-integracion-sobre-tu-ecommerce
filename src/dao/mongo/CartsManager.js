@@ -8,11 +8,9 @@ class CartManager {
 				products: [],
 			} 
 			const createdCart = await cartsModel.create(newCart)
-			
 			if(!createdCart){
 				throw new Error('Cart creation failed.')
 			}
-
 			return createdCart
 		} catch(error){
 			if(error == 'Cart creation failed.'){

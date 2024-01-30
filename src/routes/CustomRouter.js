@@ -46,6 +46,8 @@ export default class CustomRouter {
 	}
 
 	handlePolicies = policies => (req, res, next) => {
+		
+
 		if(policies.includes('PUBLIC')){
 			return next()
 		}
@@ -71,6 +73,8 @@ export default class CustomRouter {
 	}
 
 	get(path, policies, ...callbacks){
+		console.log('AQUI POLICIES: ' + policies)
+		
 		this.router.get(path, this.generateCustomResponses, this.handlePolicies(policies) ,this.applyCallbacks(callbacks))
 	}
 

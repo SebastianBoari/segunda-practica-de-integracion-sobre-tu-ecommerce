@@ -27,7 +27,7 @@ class ProductManager {
 		}
 		
 		try {
-			const products = await productsModel.paginate(formatQuery, {page: formatPage, limit: formatLimit, sort: { price: formatSort }, lean: true})
+			const products = await productsModel.paginate(formatQuery, {page: formatPage, limit: formatLimit, sort: { price: Number(formatSort) }, lean: true})
 
 			products.prevLink = products.hasPrevPage ? `?page=${products.prevPage}` : ''
 			products.nextLink = products.hasNextPage ? `?page=${products.nextPage}` : ''

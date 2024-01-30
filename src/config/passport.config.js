@@ -1,33 +1,22 @@
 import passport from 'passport'
-import passport_jwt, { ExtractJwt } from 'passport-jwt'
 import local from 'passport-local'
+import jwt, { ExtractJwt } from 'passport-jwt'
 import GitHubStrategy from 'passport-github2'
 
 import { clientID, clientSecret, callbackURL, jwtKey } from '../../env.js'
-import { createHash, isValidPassword, cookieExtractor } from '../utils.js'
+import { createHash, isValidPassword } from '../utils.js'
 
 import cartManager from '../dao/mongo/CartsManager.js'
 import userModel from '../dao/models/user.model.js'
 
 const LocalStrategy = local.Strategy
-const JWTStrategy = passport_jwt.Strategy
+const JWTStrategy = jwt.Strategy
 
 const initializePassport = () => {
 	
-	passport.use('jwt', new JWTStrategy({
-		jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
-		secretOrKey: jwtKey
-	}, async (jwt_payload, done) => {
-		try{
-			return done(null, jwt_payload)
-		} catch(error){
-			return done(error)
-		}
-	}))
-
 	passport.use('register', new LocalStrategy({
 		passReqToCallback: true,
-		usernameField: 'email',
+		usernameField: 'email'
 	}, async (req, username, password, done) => {
 		try{
 			const { first_name, last_name, email, age } = req.body
@@ -35,7 +24,7 @@ const initializePassport = () => {
 			const user = await userModel.findOne({ email: username })
 
 			if(user){
-				return done(null, false, { 'message': 'User already exists.'})
+				return done(null, false, { message: 'User already exists.'})
 			}
 
 			const newCart = await cartManager.createEmptyCart()
@@ -63,17 +52,17 @@ const initializePassport = () => {
 	}))
 
 	passport.use('login', new LocalStrategy({
-		usernameField: 'email',
+		usernameField: 'email'
 	}, async (username, password, done) => {
 		try{
 			const user = await userModel.findOne({ email: username})
 			
 			if(!user){
-				return done(null, false, { 'message': 'User does not exist.'})
+				return done(null, false, { message: 'User does not exist.'})
 			}
 
 			if (!isValidPassword(user, password)){
-				return done(null, false, { 'message': 'Invalid password.'})
+				return done(null, false, { message: 'Invalid password.'})
 			}
 
 			return done(null, user)
@@ -87,6 +76,7 @@ const initializePassport = () => {
 		clientSecret: clientSecret,
 		callbackURL: callbackURL
 	}, async (accessToken, refreshToken, profile, done) => {
+		console.log(profile)
 		try{
 			const user = await userModel.findOne({ email: profile._json.email })
 
@@ -100,7 +90,7 @@ const initializePassport = () => {
 				first_name: profile._json.name,
 				email: profile._json.email,
 				role: 'user',
-				cart: newCart._id,
+				cart: newCart._id
 			}
 
 			const createdUser = await userModel.create(newUser)
@@ -108,6 +98,22 @@ const initializePassport = () => {
 			return done(null, createdUser)
 		} catch (error) {
 			return done(error, false)
+		}
+	}))
+
+	const cookieExtractor = (req) => {
+		const token = (req && req.cookies) ? req.cookies['spazzio'] : null
+		return token
+	}
+
+	passport.use('jwt', new JWTStrategy({
+		jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
+		secretOrKey: jwtKey
+	}, async (jwt_payload, done) => {
+		try {
+			return done(null, jwt_payload)
+		} catch(error) {
+			return done(error)
 		}
 	}))
 

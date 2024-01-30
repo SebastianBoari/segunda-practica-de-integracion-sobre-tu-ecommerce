@@ -35,21 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
 					window.location.href = '/products'
 				} else {
 					res.json().then((data) => {
-						if(data.info === 'User does not exist.'){
+						if(data.message === 'User does not exist.'){
 							email.classList.toggle('is-invalid')
 
 							email.addEventListener('input', () => {
 								email.classList.remove('is-invalid')
 							})
 
-						} else if(data.info === 'Invalid password.'){
+						} else if(data.message === 'Invalid password.'){
 							password.classList.toggle('is-invalid')
 
 							password.addEventListener('input', () => {
 								password.classList.remove('is-invalid')
 							})
 						} else {
-							alert(`${data.info}`)
+							alert(`${data.message}`)
 						}
 					})
 				}
