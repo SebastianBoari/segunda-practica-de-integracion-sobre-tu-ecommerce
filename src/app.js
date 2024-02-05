@@ -10,7 +10,7 @@ import MongoStore from 'connect-mongo'
 import passport from 'passport'
 import initializePassport from './config/passport.config.js'
 // Config/Utils
-import { uri, saltWord } from '../env.js'
+import { URI, SALT_WORD, PORT } from '../env.js'
 // Routes
 import chatRouter from './routes/chat.routes.js'
 import productsRouter from './routes/products.routes.js'
@@ -36,9 +36,9 @@ app.set('view engine', 'handlebars')
 // Session config
 app.use(session({
 	store: MongoStore.create({
-		mongoUrl: uri
+		mongoUrl: URI
 	}),
-	secret: saltWord,
+	secret: SALT_WORD,
 	resave: false,
 	saveUninitialized: false
 }))
@@ -52,10 +52,10 @@ app.use(passport.session())
 const run = async () => {
 	try{
 		// DB Connection
-		await mongoose.connect(uri)
+		await mongoose.connect(URI)
 
 		// HTTP Server Up
-		const httpServer = app.listen(8080, () => console.log('Server up'))
+		const httpServer = app.listen(PORT, () => console.log(`server up at port ${PORT}`))
 		// Websocket Server Up
 		const io = new Server(httpServer)
 

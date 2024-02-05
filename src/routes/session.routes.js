@@ -41,6 +41,15 @@ router.post('/login', passport.authenticate('login', {
 	res.status(200).json({ 'status': 'success', 'payload': 'User logged in'})
 })
 
+router.get('/current', async (req, res) => {	
+
+	if(!req.session.user){
+		res.status(401).json({ 'status': 'error', 'message': 'Unauthorized or not logged.' })
+	}
+	
+	res.status(200).json({ 'status': 'success', 'payload': req.session.user })
+})
+
 router.get('/failLogin', (req, res) => {
 	const errorMessages = req.session.messages
 	const currentError = errorMessages.length - 1
@@ -71,5 +80,6 @@ router.delete('/logout', async (req, res) => {
 		}
 	})
 })
+
 
 export default router
